@@ -1,29 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import { Route, Routes } from 'react-router-dom';
+import Login from './pages/Login';
+import Landing from './pages/Landing';
+import Registration from './pages/Registration';
 
 function App() {
-const [backendData, setBackendData] = useState([{}]);
-
-useEffect(() => {
-  fetch("/connect").then(
-    response => response.json()
-  ).then(
-    data => {
-      setBackendData(data)
-    }
-  )
-}, [])
-
   return (
     <div>
-      {(typeof backendData.messages === 'undefined') ? (
-        <p>Wait..it is loading!</p>
-      ) : (
-        backendData.messages.map((message, i) => (
-          <p key={i}>{message}</p>
-        ))
-      )}
+          <Routes>
+            <Route path="/registration" element={<Registration />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/landing" element={<Landing />} />
+          </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
