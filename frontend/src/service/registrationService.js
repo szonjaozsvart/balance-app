@@ -1,7 +1,8 @@
 async function register(firstName,lastName, email, password, setErrorMessage, setShowError, navigate
   ) {
     try {
-      const response = await fetch("http://localhost:3000/registration", {
+      console.log('servicebe vagyok')
+      const response = await fetch('http://localhost:8080/registration', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -15,9 +16,13 @@ async function register(firstName,lastName, email, password, setErrorMessage, se
         }),
       });
       const data = await response.json();
-      if (response.status !== 200) {
+      if(response.status === 501) {
         setShowError(true);
         setErrorMessage("This email already taken! Try another!");
+        return;
+      } else if (response.status !== 200) {
+        setShowError(true);
+        setErrorMessage("Something went wrong!");
         return;
       }
       navigate('/login');

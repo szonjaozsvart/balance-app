@@ -12,6 +12,7 @@ import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import register from "../service/registrationService";
 import FormField from "../components/FormField";
+import "./link.css";
 
 export default function Registration() {
   const [firstName, setFirstName] = useState("");
@@ -70,8 +71,8 @@ export default function Registration() {
     }
   };
   return (
-    <Grid align="center" justifyContent="center">
-      <Typography variant="h3" margin={3} fontWeight="bold" component="span">
+    <Grid align="center" justifyContent="center" margin={5}>
+      <Typography variant="h3" margin={3} fontWeight="bold" component="span" color="primary" >
         Registration
       </Typography>
       <Container align="center" maxWidth="xs" data-testid="errorContainer">
@@ -139,14 +140,15 @@ export default function Registration() {
           </Button>
           <br />
           <br />
+          <Typography align="center" padding={3}>
           <Link
-            color="primary"
             to="/login"
             title="Go to Registration"
             className="link"
           >
             You already have an account? Click here!
           </Link>
+          </Typography>
         </form>
       </Container>
     </Grid>

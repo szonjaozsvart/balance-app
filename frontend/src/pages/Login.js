@@ -30,8 +30,8 @@ function Login() {
   };
 
   return (
-    <Grid align="center" justifyContent="center">
-      <Typography variant="h3" margin={3} fontWeight="bold" component="span">
+    <Grid align="center" justifyContent="center" margin={5}>
+      <Typography variant="h3" margin={3} fontWeight="bold" component="span" color="primary">
         Login
       </Typography>
       <Container align="center" maxWidth="xs">
@@ -72,9 +72,8 @@ function Login() {
             >
               Login
             </Button>
-            <Typography align="center" padding={5}>
+            <Typography align="center" padding={3}>
               <Link
-                color="primary"
                 to="/registration"
                 title="Go to Registration"
                 className="link"

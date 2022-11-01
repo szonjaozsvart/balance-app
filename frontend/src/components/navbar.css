@@ -1,0 +1,38 @@
+/* * {
+    box-sizing: border-box;
+}
+
+body {
+    margin:0;
+} */
+
+/* .nav-bar {
+background-color:#182d43;
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 2 rem;
+padding:0 2rem;
+} */
+
+/* .links {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    padding: 10px;
+} */
+
+.about, .login, .join {
+    text-decoration: none;
+    color: white;
+    list-style: none;
+    font-size: large;
+    margin: 5px;
+    padding: 5px;
+}
+
+.title {
+    text-decoration: none;
+    color: white;
+}
+
