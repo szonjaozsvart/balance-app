@@ -14,7 +14,7 @@ async function login(email, password, setErrorMessage, setShowError, navigate) {
       const data = await response.json();
       if (response.status !== 200) {
         setShowError(true);
-        setErrorMessage(data.error);
+        setErrorMessage(data.message);
         return;
       }
       window.localStorage.setItem('token', data.token);

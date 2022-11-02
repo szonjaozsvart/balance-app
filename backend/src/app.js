@@ -31,13 +31,11 @@ app.post('/registration', async (req, res) => {
     [items.map(item => [item.firstName, item.lastName, item.email, item.password])],
     function (error, results) {
       if (error && error.code === 'ER_DUP_ENTRY') {
-        console.log(error)
         res.status(501).send({
           error: 'Email already taken!',
         });
         return;
       } else if (error && error.code !== 'ER_DUP_ENTRY') {
-        console.log(error)
         res.status(500).send({
           error: 'Database error',
         });
@@ -48,21 +46,26 @@ app.post('/registration', async (req, res) => {
 })
 
 app.post('/login', async (req, res) => {
-  connection.query(`SELECT * FROM bal_reg WHERE email = "${req.body.email}"`, function (error, results) {
-    if (error) {
-      return res.status(400).send({
-        error: "Cannot find user!"
-      })
-    }
-    try {
-      const givenPassword = connection.query(`SELECT email FROM bal_reg WHERE email = "${req.body.email}"`)
-      bcrypt.compareSync(req.body.password, givenPassword)
-      res.send(results)
-    } catch (error) {
-      res.send(error)
-    }
+    connection.query(`SELECT email, password FROM bal_reg WHERE email = "${req.body.email}"`, function (error, result) {
+      if (error) {
+        return res.status(400).send({
+          error: "Cannot find user!"
+        })
+      }
+      try {
+        let givenPassword = result[0].password;
+        let passwordMatch = bcrypt.compareSync(req.body.password, givenPassword)
+        if(!passwordMatch) {
+          return res.status(400).send({
+            message: "Email or / and password not accepted!"
+          })
+        }
+        res.send(result)
+      } catch (error) {
+        res.send(error)
+      }
+    })
   })
-})
 
 app.listen(PORT, () => {
   console.log(`App is listening on ${PORT}`);
