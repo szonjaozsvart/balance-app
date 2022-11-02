@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 dotenv.config();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const connection = require('./db');
 const app = express();
@@ -45,6 +46,13 @@ app.post('/registration', async (req, res) => {
     })
 })
 
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (email) => {
+  return jwt.sign({email}, process.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: maxAge
+  })
+}
+
 app.post('/login', async (req, res) => {
     connection.query(`SELECT email, password FROM bal_reg WHERE email = "${req.body.email}"`, function (error, result) {
       if (error) {
@@ -60,8 +68,13 @@ app.post('/login', async (req, res) => {
             message: "Email or / and password not accepted!"
           })
         }
-        res.send(result)
+        const token = createToken(result[0].email);
+        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000})
+        res.send({'token': token})
+        console.log('token',token)
       } catch (error) {
+        console.log("error", error)
+        console.log("token", token)
         res.send(error)
       }
     })
