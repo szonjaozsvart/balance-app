@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
+import LogoutButton from "./LogoutButton";
 
 function NavBar() {
-  const [userState, setUserState] = useState('');
   
   return (
     <Grid
@@ -20,23 +20,16 @@ function NavBar() {
       </Typography>
       <Grid display="flex" flexDirection="row" margin={2}>
         <Link to="/login" className="login">
-          Login
+          LOGIN
         </Link>
         <Link to="/registration" className="join">
-          Join
+          JOIN
         </Link>
         <Link to="/about" className="about">
-          About
+          ABOUT
         </Link>
-      {!userState ? null : (
-        <Link
-          className="about"
-          to="/login" 
-          onClick={ () => localStorage.clear() && setUserState('')}
-        >
-          Logout
-        </Link>
-      )}
+        {window.localStorage.length < 1 ? null :
+        (<LogoutButton />)}
       </Grid>
     </Grid>
   );
