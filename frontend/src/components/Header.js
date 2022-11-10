@@ -6,7 +6,6 @@ import { Typography } from "@mui/material";
 import LogoutButton from "./LogoutButton";
 
 function NavBar() {
-  
   return (
     <Grid
       display="flex"
@@ -19,17 +18,25 @@ function NavBar() {
         BALANCE APP
       </Typography>
       <Grid display="flex" flexDirection="row" margin={2}>
-        <Link to="/login" className="login">
-          LOGIN
-        </Link>
-        <Link to="/registration" className="join">
-          JOIN
-        </Link>
-        <Link to="/about" className="about">
-          ABOUT
-        </Link>
-        {window.localStorage.length < 1 ? null :
-        (<LogoutButton />)}
+        {window.localStorage.length < 1 ? (
+          <Link to="/login" className="login">
+            LOGIN
+          </Link>
+        ) : (
+          <Link to="/landing" className="login">
+            LOGIN
+          </Link>
+        )}
+        {window.localStorage.length < 1 ? (
+          <Link to="/registration" className="join">
+            JOIN
+          </Link>
+        ) : (
+          <Link to="/landing" className="join">
+            JOIN
+          </Link>
+        )}
+        {window.localStorage.length < 1 ? null : <LogoutButton />}
       </Grid>
     </Grid>
   );

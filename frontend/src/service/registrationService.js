@@ -1,7 +1,6 @@
 async function register(firstName,lastName, email, password, setErrorMessage, setShowError, navigate
   ) {
     try {
-      console.log('servicebe vagyok')
       const response = await fetch('http://localhost:8080/registration', {
         method: 'POST',
         headers: {
