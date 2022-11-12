@@ -101,7 +101,7 @@ app.post("/login", async (req, res) => {
 
 app.get("/landing", async (req, res) => {
   connection.query(
-    `SELECT id, first_name, last_name FROM bal_reg`,
+    `SELECT id, first_name, last_name, email FROM bal_reg`,
     function (error, result) {
       if (error) {
         res.status(400).send({

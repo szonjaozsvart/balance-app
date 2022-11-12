@@ -14,27 +14,31 @@ function Landing() {
   }, []);
 
   return (
-    <Container>
-      <Grid margin={2}>
-        <Link to="/addPage" title="Add a new member!" className="newMember">
-          + ADD NEW MEMBER
-        </Link>
-      </Grid>
-      <Typography margin={2}>
-        Somebody made your day?
-        <br></br>
-        Let them know it!
-      </Typography>
-      {data === "undefined" || data.length === 0 ? (
-        <Typography>
-          If there is no one added to your list, start it right now!
-        </Typography>
-      ) : (
-        <Grid container spacing={6} marginTop={3}>
-          <ListingMembers allMembers={data} />
+    <Grid>
+      {window.localStorage.length < 1 ? <Typography>Please <Link to="/registration">register</Link> or <Link to="/login">log in</Link>!</Typography> : 
+      (<Container>
+        <Grid margin={2}>
+          <Link to="/addPage" title="Add a new member!" className="newMember">
+            + ADD NEW MEMBER
+          </Link>
         </Grid>
-      )}
-    </Container>
+        <Typography margin={2}>
+          Somebody made your day?
+          <br></br>
+          Let them know it!
+        </Typography>
+        {data === "undefined" || data.length === 0 ? (
+          <Typography>
+            If there is no one added to your list, start it right now!
+          </Typography>
+        ) : (
+          <Grid container spacing={6} marginTop={3}>
+            <ListingMembers allMembers={data} />
+          </Grid>
+        )}
+      </Container>)
+  }
+    </Grid>
   );
 }
 

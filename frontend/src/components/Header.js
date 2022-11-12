@@ -22,20 +22,12 @@ function NavBar() {
           <Link to="/login" className="login">
             LOGIN
           </Link>
-        ) : (
-          <Link to="/landing" className="login">
-            LOGIN
-          </Link>
-        )}
+        ) : null}
         {window.localStorage.length < 1 ? (
           <Link to="/registration" className="join">
             JOIN
           </Link>
-        ) : (
-          <Link to="/landing" className="join">
-            JOIN
-          </Link>
-        )}
+        ) : null}
         {window.localStorage.length < 1 ? null : <LogoutButton />}
       </Grid>
     </Grid>
