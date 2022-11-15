@@ -7,14 +7,12 @@ export default function ListingMembers({ allMembers }) {
     <>
       {allMembers.map((member) => (
         <Grid item xs={3} key={member.id}>
-          <Paper sx={{ padding:1, background: 'lightblue' }} elevation={7} display="flex"  alignItems="center" justifyContent="center">
-            <Paper sx={{ padding: 3, opacity: 0.9}} >
+            <Paper sx={{ padding: 3, opacity: 0.9, background: 'lightblue'}} >
               <Button variant="button" component="span">
                 {member.first_name}
               </Button>
               <Typography>{member.email}</Typography>
             </Paper>
-          </Paper>
         </Grid>
       ))}
     </>

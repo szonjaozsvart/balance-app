@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
-import AddIcon from '@mui/icons-material/Add';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import { Container } from '@mui/system';
@@ -16,14 +15,13 @@ import FormField from '../components/FormField';
 function AddingPage() {
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
-  const [score, setScore] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (validator.isEmpty(nickname) || validator.isEmpty(email) || validator.isEmpty(score)) {
+    if (validator.isEmpty(nickname) || validator.isEmpty(email)) {
       setShowError(true);
       setErrorMessage('Please fill all the fields!');
       return;
@@ -32,11 +30,7 @@ function AddingPage() {
       setShowError(true);
       return setErrorMessage("Email is required");
     }
-    if (score < 1 || score > 100) {
-      setShowError(true);
-      return setErrorMessage("Starting score must be between 1-99!");
-    }
-    adding(email, nickname, score, setErrorMessage, setShowError, navigate);
+    adding(email, nickname, setErrorMessage, setShowError, navigate);
   };
 
   return (
@@ -73,15 +67,6 @@ function AddingPage() {
               icon={<EmailIcon fontSize="large" />}
               value={email}
               onChange={setEmail}
-            />
-            <br />
-            <FormField
-              name="startingYou"
-              type="text"
-              label="Your starting score"
-              icon={<AddIcon fontSize="large" />}
-              value={score}
-              onChange={setScore}
             />
             <br />
             <Button
